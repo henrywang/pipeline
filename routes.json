@@ -1,0 +1,24 @@
+[
+  {
+    "path": "/",
+    "page": "./pages/blueprints",
+    "chunk": "main"
+  },
+  {
+    "path": "/error",
+    "page": "./pages/error",
+    "chunk": "main"
+  },
+  {
+    "path": "/blueprints",
+    "page": "./pages/blueprints"
+  },
+  {
+    "path": "/blueprint/:blueprint",
+    "page": "./pages/blueprint"
+  },
+  {
+    "path": "/edit/:blueprint",
+    "page": "./pages/blueprintEdit"
+  }
+]
