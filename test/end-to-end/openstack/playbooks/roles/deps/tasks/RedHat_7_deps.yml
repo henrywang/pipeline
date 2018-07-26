@@ -1,0 +1,16 @@
+---
+  - name: Install end to end test required packages
+    yum:
+      name: "{{ packages }}"
+      state: latest
+    vars:
+      packages:
+        - make
+        - git
+        - jq
+        - rpm-build
+        - gnupg
+        - nodejs
+        - lorax-composer
+        - cockpit-system
+        - cockpit-ws

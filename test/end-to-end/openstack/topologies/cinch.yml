@@ -1,0 +1,19 @@
+---
+topology_name: "composer-test"
+resource_groups:
+  -
+    resource_group_name: "composer-group"
+    resource_group_type: "openstack"
+    resource_definitions:
+      -
+        name: "vm"
+        flavor: "m1.small"
+        role: "os_server"
+        image: {{ lookup('env','LATEST_IMAGE') }}
+        count: 1
+        keypair: "ci-ops-central"
+        networks:
+          - "end-to-end"
+    credentials:
+      filename: "cinch.yml"
+      profile: "ci-rhos"

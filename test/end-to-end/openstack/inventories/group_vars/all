@@ -1,0 +1,4 @@
+---
+ansible_private_key_file: "{{ inventory_dir }}/../keystore/ci-ops-central"
+ansible_become: yes
+ansible_ssh_common_args: '-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'

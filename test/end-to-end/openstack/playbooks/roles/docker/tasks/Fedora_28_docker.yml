@@ -1,0 +1,35 @@
+---
+  - name: Fedora 28 - Uninstall docker-ce old versions
+    dnf:
+      name: "{{ packages }}"
+      state: absent
+    vars:
+      packages:
+        - docker
+        - docker-client
+        - docker-client-latest
+        - docker-common
+        - docker-latest
+        - docker-latest-logrotate
+        - docker-logrotate
+        - docker-selinux
+        - docker-engine-selinux
+        - docker-engine
+
+  - name: Fedora 28 - Install required packages to set up the repository
+    dnf:
+      name: dnf-plugins-core
+      state: present
+
+  - name: Fedora 28 - Set up the stable repository
+    command: dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
+
+  - name: Fedora 28 - Install docker-ce
+    dnf:
+      name: docker-ce
+      state: present
+
+  - name: Fedora 28 - Start docker
+    service:
+      name: docker
+      state: started

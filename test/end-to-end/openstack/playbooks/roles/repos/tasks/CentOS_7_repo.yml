@@ -1,0 +1,21 @@
+---
+  - name: CentOS 7 - Add EPEL YUM repo
+    yum:
+      name: https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+      state: installed
+
+  - name: CentOS 7 - Add RHEL Extras YUM repo
+    yum_repository:                                                             
+      name: rhel_extra_repo                                                          
+      description: RHEL 7 extras YUM repo                                       
+      file: rhel_extras_repo                                                         
+      baseurl: {{ lookup('env','REPO_E') }}
+      gpgcheck: no
+
+  - name: CentOS 7 - Add RHEL 7 base repo
+    yum_repository:
+      name: base_repo
+      description: RHEL 7 base YUM repo
+      file: base_repo
+      baseurl: {{ lookup('env','REPO_B') }}
+      gpgcheck: no

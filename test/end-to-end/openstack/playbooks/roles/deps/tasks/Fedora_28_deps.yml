@@ -1,0 +1,20 @@
+---
+  - name: Install end to end test required packages
+    dnf:
+      name: "{{ packages }}"
+      state: latest
+    vars:
+      packages:
+        - make
+        - git
+        - jq
+        - rpm-build
+        - gnupg
+        - nodejs
+        - lorax-composer
+        - cockpit-system
+        - cockpit-ws
+
+  - name: Disable selinux reqiured by lorax-composer
+    selinux:
+      state: disabled

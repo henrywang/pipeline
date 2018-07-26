@@ -1,0 +1,7 @@
+---
+- hosts: all
+  serial: 4
+
+  tasks:
+    - name: execute end to end test
+      shell: docker run --rm --name welder_end_to_end --network host -v /run/weldr:/run/weldr -v ./failed-image:/tmp/failed-image welder/web-e2e-tests:latest npm run test

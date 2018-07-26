@@ -1,0 +1,40 @@
+---
+  - name: RHEL 7 - Uninstall docker-ce old versions
+    yum:
+      name: "{{ packages }}"
+      state: absent
+    vars:
+      packages:
+        - docker
+        - docker-client
+        - docker-client-latest
+        - docker-common
+        - docker-latest
+        - docker-latest-logrotate
+        - docker-logrotate
+        - docker-selinux
+        - docker-engine-selinux
+        - docker-engine
+
+  - name: RHEL 7 - Install required packages to set up the repository
+    yum:
+      name: yum-utils
+      state: present
+
+  - name: RHEL 7 - Set up the stable repository
+    command: yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+
+  - name: RHEL 7 - Install container-selinux
+    yum:
+      name: http://mirror.centos.org/centos/7/extras/x86_64/Packages/container-selinux-2.55-1.el7.noarch.rpm
+      state: present
+
+  - name: RHEL 7 - Install docker-ce
+    yum:
+      name: docker-ce
+      state: present
+
+  - name: RHEL 7 - Start docker
+    service:
+      name: docker
+      state: started

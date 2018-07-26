@@ -1,0 +1,17 @@
+---
+  - include_tasks: "{{ ansible_distribution }}_{{ ansible_distribution_major_version }}_deps.yml"
+
+  # - name: Copy a new cockpit.conf file into place
+  #   copy:
+  #     src: "{{ role_path }}/files/cockpit.conf"
+  #     dest: /etc/cockpit/cockpit.conf
+
+  - name: start lorax-composer
+    systemd:
+      name: lorax-composer
+      state: started
+
+  - name: start cockpit
+    systemd:
+      name: cockpit.socket
+      state: started

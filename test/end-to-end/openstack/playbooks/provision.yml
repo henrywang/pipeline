@@ -1,0 +1,50 @@
+---
+# - name: wait for SSH
+#   hosts: all
+#   gather_facts: false
+#   roles:
+#     - check_ssh
+
+- hosts: all
+  roles:
+    - repos
+    - docker
+    - deps
+  tasks:
+    - name: update root password
+      user:
+        name: root
+        password: $6$jYrf4F6iCv8hqP3W$g61QO1kAbEdA59Bb1HtaDlmWcSXl9uGARvhBAB611AXsXRrCdEPeoYCIo72vLbx5/P5U3XOmYAycjsWIdGjdf0
+
+    - name: create composer user
+      user:
+        name: composer
+        password: $6$jYrf4F6iCv8hqP3W$g61QO1kAbEdA59Bb1HtaDlmWcSXl9uGARvhBAB611AXsXRrCdEPeoYCIo72vLbx5/P5U3XOmYAycjsWIdGjdf0
+        group: wheel
+
+    - name: run rpm target in Makefile
+      make:
+        target: rpm
+
+    - name: install welder-web rpm package on RHEL and CentOS
+      yum:
+        name: "welder-web*.rpm"
+        state: present
+      when: ansible_distribution == "RedHat" or ansible_distribution == "CentOS"
+
+    - name: install welder-web rpm package on Fedora
+      dnf:
+        name: "welder-web*.rpm"
+        state: present
+      when: ansible_distribution == "Fedora"
+
+    - name: create failed case screen capture file
+      file:
+        path: ./failed-image
+        state: directory
+        mode: 0755
+
+    - name: build end to end test docker image
+      shell: docker build -t welder/web-e2e-tests:latest .
+      args:
+        chdir: test/end-to-end

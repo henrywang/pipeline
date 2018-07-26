@@ -1,0 +1,9 @@
+---
+inventory_layout:
+  vars:
+      hostname: __IP__
+  hosts:
+    "vm":
+      count: 1
+      host_groups:
+        - VM
