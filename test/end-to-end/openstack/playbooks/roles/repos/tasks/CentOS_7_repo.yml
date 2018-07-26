@@ -9,7 +9,7 @@
       name: rhel_extra_repo                                                          
       description: RHEL 7 extras YUM repo                                       
       file: rhel_extras_repo                                                         
-      baseurl: {{ lookup('env','REPO_E') }}
+      baseurl: {{ env['REPO_E'] }}
       gpgcheck: no
 
   - name: CentOS 7 - Add RHEL 7 base repo
@@ -17,5 +17,5 @@
       name: base_repo
       description: RHEL 7 base YUM repo
       file: base_repo
-      baseurl: {{ lookup('env','REPO_B') }}
+      baseurl: {{ env['REPO_B'] }}
       gpgcheck: no

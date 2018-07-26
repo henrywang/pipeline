@@ -9,7 +9,7 @@ resource_groups:
         name: "vm"
         flavor: "m1.small"
         role: "os_server"
-        image: {{ lookup('env','LATEST_IMAGE') }}
+        image: {{ env['LATEST_IMAGE'] }}
         count: 1
         keypair: "ci-ops-central"
         networks:

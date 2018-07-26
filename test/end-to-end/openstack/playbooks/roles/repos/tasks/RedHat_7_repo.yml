@@ -4,7 +4,7 @@
       name: base_repo
       description: RHEL 7 base YUM repo
       file: base_repo
-      baseurl: {{ lookup('env','REPO_B') }}
+      baseurl: {{ env['REPO_B'] }}
       gpgcheck: no
 
   - name: RHEL 7 - Add optional repo
@@ -12,7 +12,7 @@
       name: optional_repo
       description: RHEL 7 optional YUM repo
       file: optional_repo
-      baseurl: {{ lookup('env','REPO_O') }}
+      baseurl: {{ env['REPO_O'] }}
       gpgcheck: no
 
   - name: RHEL 7 - Add extras repo
@@ -20,7 +20,7 @@
       name: extra_repo
       description: RHEL 7 extras YUM repo
       file: extras_repo
-      baseurl: {{ lookup('env','REPO_E') }}
+      baseurl: {{ env['REPO_E'] }}
       gpgcheck: no
 
   - name: RHEL 7 - Add EPEL repo
